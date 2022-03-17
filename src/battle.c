@@ -12,7 +12,6 @@
 #define EFFECTIVE 1.0
 
 //determine the max hp of a given battler based on its properties
-//TODO: this really should be a pkmn not a battler, we can make a seperate function for each
 int get_max_hp(battler_t* b){
   pkmn_t*  pkmn = b->pkmn;
   int ev = pkmn->hp_ev;
@@ -138,7 +137,6 @@ int get_true_spd(battler_t* b){
 //return half of the damage scalar given the type of an attacking move
 //and one of the types of a defending pokemon
 //this is common knowledge but we reffered to https://pokemondb.net/type
-//TODO: scrappy, odor sleuth, smack-down, thousand arrows, shadow/prism shield, multiscale, etc. 
 float get_eff_scalar_single(elem_t atk_elem, elem_t def_elem){
   //do we need the break statements if we just return after every match?
   //should we keep them anyway just for convention?
@@ -458,13 +456,11 @@ float get_eff(battler_t* b, move_t* m){
 }
 
 //calculate damage done from one battler to another
-//TODO: somehow there's an off by one error when comparing to results from https://calc.pokemonshowdown.com/
 int calc_dmg(battler_t* a, battler_t* d, move_t* mv, bool crit){
-  int pwr = mv->pwr; //TODO: effective power
+  int pwr = mv->pwr; 
   int atk_lvl = a->pkmn->lvl;
 
   //determine whether to use physical or special attack
-  //TODO: psyshock, psystrike, sacred sword, shell side-arm, moongeist beam, etc. 
   movecat_t cat = mv->cat;
   int atk_stat=0;
   int def_stat=0;

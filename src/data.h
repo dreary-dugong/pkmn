@@ -179,4 +179,9 @@ void print_species(species_t* spec);
 void print_pkmn_short(pkmn_t* p);
 void print_team(pkmn_tm_t* tm);
 
+//helper conversion methods
+elem_t str_to_elem(char* s);
+stat_t str_to_stat(char* s);
+movecat_t str_to_movecat(char* s);
+
 #endif

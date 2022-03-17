@@ -20,7 +20,6 @@
  */
 
 //make a move struct
-//TODO:other kinds of moves
 move_t* make_move(movecat_t cat, elem_t elem, int pwr, int acc, char* name){
   char* name_ptr = malloc(strlen(name)+1);
   strlcpy(name_ptr, name, sizeof(name_ptr)+1);
@@ -60,7 +59,6 @@ species_t* make_species(char* name, elem_t elem_prim, elem_t elem_sec, int hp_b,
 }
 
 //make a pkmn struct
-//TODO: ability, nickname, item, gender
 pkmn_t* make_pkmn(species_t* spec, nature_t* nature, int lvl, move_t* mv1, move_t* mv2, move_t* mv3, move_t* mv4,
     int hp_iv, int atk_iv, int def_iv, int spatk_iv, int spdef_iv, int spd_iv,
     int hp_ev, int atk_ev, int def_ev, int spatk_ev, int spdef_ev, int spd_ev){
@@ -142,7 +140,6 @@ pkmn_tm_t* make_team(pkmn_t* p1, pkmn_t* p2, pkmn_t* p3, pkmn_t* p4, pkmn_t* p5,
  */
 
 //free a move struct
-//TODO: other kinds of moves?
 void free_move(move_t* m){
   free(m->name);
   free(m);
@@ -155,7 +152,6 @@ void free_species(species_t* spec){
 }
 
 //free a pkmn struct
-//TODO: nickname
 void free_pkmn(pkmn_t* p){
   free(p);
 }
@@ -239,7 +235,6 @@ void print_species(species_t* spec){
 }
 
 //print debug info about a pkmn struct in Pokemon Showdown team builder format
-//TODO: ability, nickname, item, gender
 void print_pkmn_short(pkmn_t* p){
   char* spec_name = p->species->name;
   printf("%s\n", spec_name);
@@ -304,5 +299,46 @@ void print_team(pkmn_tm_t* tm){
   for(int i=0;i<6;i++){
     printf("%s\n", tm->team[i]->species->name);
   }
+}
+
+/* =====================================
+ * conversion functions
+ * =====================================
+ */
+
+stat_t str_to_stat(char* s){
+  if (strcmp(s, "hp") == 0) return hp;
+  if (strcmp(s, "atk") == 0) return atk;
+  if (strcmp(s, "def") == 0) return def;
+  if (strcmp(s, "spatk") == 0) return spatk;
+  if (strcmp(s, "spdef") == 0) return spdef;
+  return spd;
+}
+
+elem_t str_to_elem(char* s){
+  if (strcmp(s, "normal") == 0) return normal;
+  if (strcmp(s, "fighting") == 0) return fighting;
+  if (strcmp(s, "poison") == 0) return poison;
+  if (strcmp(s, "fairy") == 0) return fairy;
+  if (strcmp(s, "fire") == 0) return fire;
+  if (strcmp(s, "water") == 0) return water;
+  if (strcmp(s, "grass") == 0) return grass;
+  if (strcmp(s, "bug") == 0) return bug;
+  if (strcmp(s, "dark") == 0) return dark;
+  if (strcmp(s, "ghost") == 0) return ghost;
+  if (strcmp(s, "flying") == 0) return flying;
+  if (strcmp(s, "dragon") == 0) return dragon;
+  if (strcmp(s, "steel") == 0) return steel;
+  if (strcmp(s, "rock") == 0) return rock;
+  if (strcmp(s, "ice") == 0) return ice;
+  if (strcmp(s, "psychic") == 0) return psychic;
+  if (strcmp(s, "ground") == 0) return ground;
+  if (strcmp(s, "electric") == 0) return electric;
+  return mystery;
+}
+
+movecat_t str_to_movecat(char* s){
+  if (strcmp(s, "normal") == 0) return phys;
+  return spec;
 }
 

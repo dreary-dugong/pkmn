@@ -6,15 +6,12 @@
 #include "calc.h"
 
 //calculate mathematically damage given raw numbers
-//TODO: possibly fix off by one error as per the note for calc_damage
 int dmg_formula(int atk_lvl, int eff_pwr, int atk, int def, bool crit, bool stab, float effective){
 
   //https://bulbapedia.bulbagarden.net/wiki/Damage
   int dmg = floor((((2*atk_lvl)/5.0+2)*eff_pwr*((float)atk/def))/50.0+2); //basic damage
   dmg = floor(dmg+(dmg*0.5*crit)); //crit
-  dmg = floor(dmg+(dmg*0.5*stab)); //same type attack bonus; TODO: adaptability ability
-  //TODO: weather
-  //TODO: 'other' see page above
+  dmg = floor(dmg+(dmg*0.5*stab)); //same type attack bonus; 
   dmg = floor(dmg*effective);
   float rand_scalar = ( (rand() % 16) + 85) / 100.0;
   dmg = floor(dmg * rand_scalar);
